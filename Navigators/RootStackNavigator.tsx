@@ -2,15 +2,15 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
 
 export type RootStackParamList = {
-  Home: undefined;
+  Setting: undefined;
 };
 
-const RootStack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootStackNavigator() {
   return (
     <RootStack.Navigator>
-      <RootStack.Screen name="Home" component={HomeScreen} />
+      <RootStack.Screen name="Setting" component={HomeScreen} />
     </RootStack.Navigator>
   );
 }
