@@ -8,7 +8,7 @@ export default function SettingScreen(props: Props) {
   return (
     <View>
       <Text>Setting Screen</Text>
-      <Text>User ID: {props.route.params.userName}</Text>
+      <Text>User name: {props.route.params.userName}</Text>
     </View>
   );
 }
