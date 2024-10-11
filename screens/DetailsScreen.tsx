@@ -1,17 +1,21 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { useAppSelector } from "../hooks";
 import { BottomTabParamList } from "../navigators/BottomTabNavigator";
-import { StyleSheet } from "react-native";
+import { RootState } from "../store/Store";
 
 type Props = NativeStackScreenProps<BottomTabParamList, "Details">;
 
 export default function DetailsScreen(props: Props) {
-  const number = useAppSelector((state) => state);
+  const userState = useAppSelector((state) => state.user);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Details Screen</Text>
-      <Text style={styles.numberText}>Number: {number}</Text>
+      <View style={styles.detailsBox}>
+        <Text style={styles.detailText}>First Name: {userState.firstName}</Text>
+        <Text style={styles.detailText}>Last Name: {userState.lastName}</Text>
+        <Text style={styles.detailText}>Age: {userState.age}</Text>
+      </View>
     </View>
   );
 }
@@ -28,18 +32,23 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     color: "#333",
-    marginBottom: 20,
+    marginBottom: 30,
   },
-  numberText: {
-    fontSize: 22,
-    color: "#555",
+  detailsBox: {
+    width: "100%",
     backgroundColor: "#fff",
-    padding: 10,
-    borderRadius: 8,
-    elevation: 3,
+    borderRadius: 10,
+    padding: 20,
+    elevation: 5,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    alignItems: "center",
+  },
+  detailText: {
+    fontSize: 20,
+    color: "#444",
+    marginBottom: 10,
   },
 });

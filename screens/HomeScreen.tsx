@@ -1,32 +1,57 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Text, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { useAppDispatch } from "../hooks";
-import { BottomTabParamList } from "../navigators/BottomTabNavigator";
-import { StyleSheet } from "react-native";
+import { createUser, userState } from "../store/user/userSlice";
 
-type Props = NativeStackScreenProps<BottomTabParamList, "Home">;
+export function HomeScreen() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [age, setAge] = useState("");
 
-export default function HomeScreen(props: Props) {
   const dispatch = useAppDispatch();
+
+  const handleSave = () => {
+    const user: userState = {
+      firstName,
+      lastName,
+      age: parseInt(age, 10),
+    };
+    dispatch(createUser(user));
+    setFirstName("");
+    setLastName("");
+    setAge("");
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home Screen</Text>
-      <Text style={styles.title}>See the result on details screen</Text>
+      <Text style={styles.title}>Profile Screen</Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => dispatch({ type: "INCREMENT", payload: 400 })}
-      >
-        <Text style={styles.buttonText}>Increase with 400</Text>
-      </TouchableOpacity>
+      <Text style={styles.label}>First Name:</Text>
+      <TextInput
+        style={styles.input}
+        value={firstName}
+        onChangeText={setFirstName}
+        placeholder="Enter your first name"
+      />
 
-      <TouchableOpacity
-        style={[styles.button, styles.decreaseButton]}
-        onPress={() => dispatch({ type: "DECREAMENT", payload: 400 })}
-      >
-        <Text style={styles.buttonText}>Decrease with 400</Text>
-      </TouchableOpacity>
+      <Text style={styles.label}>Last Name:</Text>
+      <TextInput
+        style={styles.input}
+        value={lastName}
+        onChangeText={setLastName}
+        placeholder="Enter your last name"
+      />
+
+      <Text style={styles.label}>Age:</Text>
+      <TextInput
+        style={styles.input}
+        value={age}
+        onChangeText={setAge}
+        placeholder="Enter your age"
+        keyboardType="numeric"
+      />
+
+      <Button title="Save" onPress={handleSave} />
     </View>
   );
 }
@@ -34,30 +59,27 @@ export default function HomeScreen(props: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 16,
+    backgroundColor: "#f8f8f8",
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f0f0f0",
   },
   title: {
     fontSize: 24,
+    fontWeight: "bold",
     marginBottom: 20,
-    fontWeight: "bold",
+    textAlign: "center",
   },
-  button: {
-    backgroundColor: "#4CAF50",
-    paddingVertical: 12,
-    paddingHorizontal: 24,
+  label: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  input: {
+    height: 40,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    paddingHorizontal: 10,
     borderRadius: 8,
-    marginVertical: 10,
-    width: "70%",
-    alignItems: "center",
-  },
-  decreaseButton: {
-    backgroundColor: "#F44336",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
+    backgroundColor: "#fff",
+    marginBottom: 12,
   },
 });

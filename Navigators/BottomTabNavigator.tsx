@@ -1,7 +1,7 @@
 import Fontisto from "@expo/vector-icons/Fontisto";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DetailsScreen from "../screens/DetailsScreen";
-import HomeScreen from "../screens/HomeScreen";
+import { HomeScreen } from "../screens/HomeScreen";
 
 export type BottomTabParamList = {
   Home: undefined;

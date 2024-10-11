@@ -2,9 +2,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { RootStackNavigator } from "./navigators/RootStackNavigator";
-import { store } from "./Store";
 import { Provider } from "react-redux";
+import { RootStackNavigator } from "./navigators/RootStackNavigator";
+import { store } from "./store/Store";
 
 export default function App() {
   return (
