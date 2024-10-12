@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import { useAppDispatch } from "../hooks";
-import { createUser, userState } from "../store/user/userSlice";
+import { useAppDispatch } from "../store/hooks";
+import { createUser, userState } from "../store/user/userReducer";
 
 export function HomeScreen() {
   const [firstName, setFirstName] = useState("");
